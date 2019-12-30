@@ -1,0 +1,55 @@
+Configurations:
+  - WindowsFeatures
+  - SqlServer
+  - SqlServerConfig
+  - SqlServerDatabase
+  - ComputerUserRights
+
+WindowsFeatures:
+  Name:
+    - NET-Framework-Core
+    - RSAT-AD-PowerShell
+
+PackageMgmt:
+  Modules:
+    - Name: dbatools
+      Repository: PSGallery
+
+ComputerUserRights:
+  Assignments:
+    - Policy: Perform_volume_maintenance_tasks
+      Identity:
+        - NT SERVICE\MSSQLSERVER
+        - Administrators
+    - Policy: Lock_pages_in_memory
+      Identity:
+        - NT SERVICE\MSSQLSERVER
+        - Administrators
+
+SqlServer:
+  DiskStyle: Regular
+  Type: Baseline
+  InstallFeatures:
+    - SQLEngine
+
+SqlServerConfig:
+  Configurations:
+    - OptionName: Backup Compression Default
+      OptionValue: 1
+    - OptionName: Cost threshold for parallelism
+      OptionValue: 50
+    - OptionName: Database Mail XPs
+      OptionValue: 1
+    - OptionName: Agent XPs
+      OptionValue: 1
+    - OptionName: Remote Admin Connections
+      OptionValue: 1
+  Memory:
+    - DynamicAlloc: true
+
+SqlServerDatabase:
+  Databases:
+    - Name: DBA
+      Collation: SQL_Latin1_General_Pref_CP850_CI_AS
+      Owner: sa
+      RecoveryModel: Simple

@@ -1,0 +1,115 @@
+ResolutionPrecedence:
+  - AllNodes\$($Node.Environment)\$($Node.NodeName)
+  - Environment\$($Node.Environment)
+  - Roles\$($Node.Role)
+  - Roles\ServerBaseline
+  - Roles\DscBaseline
+
+DatumHandlers:
+  Datum.ProtectedData::ProtectedDatum:
+    CommandOptions:
+      PlainTextPassword: Password1234
+      #Certificate: ### THUMBPRINT ###
+
+default_lookup_options: MostSpecific
+
+lookup_options:
+  Configurations:
+    merge_basetype_array: Unique
+
+  Baseline:
+    merge_hash: deep
+
+  DscTagging:
+    merge_hash: deep
+
+  WindowsFeatures:
+    merge_hash: deep
+
+  WindowsFeatures\Name:
+    merge_basetype_array: Unique
+
+  FilesAndFolders:
+    merge_hash: deep
+  FilesAndFolders\Items:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - DestinationPath
+
+  PackageMgmt:
+    merge_hash: deep
+  PackageMgmt\Modules:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Name
+
+  ComputerUserRights:
+    merge_hash: deep
+  ComputerUserRights\Assignments:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Policy
+
+
+  SqlServer:
+    merge_hash: deep
+  SqlServer\InstallFeatures:
+    merge_basetype_array: Unique
+
+  SqlServerConfig:
+    merge_hash: deep
+  SqlServerConfig\Configurations:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - OptionName
+
+  SqlServerDatabase:
+    merge_hash: deep
+  SqlServerDatabase\Databases:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Name
+
+  SqlUserPermission:
+    merge_hash: deep
+  SqlUserPermission\Users:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Name
+
+  SqlOperator:
+    merge_hash: deep
+  SqlOperator\Operators:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Name
+
+  SendNotification:
+    merge_hash: deep
+  SendNotification\Notifications:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Name
+
+  NetworkIpConfiguration:
+    merge_hash: deep
+
+  LcmConfig:
+    merge_hash: hash
+  LcmConfig\Settings:
+    merge_hash: deep
+  LcmConfig\ReportServerWeb: deep
+  LcmConfig\ConfigurationRepositoryWeb:
+    merge_hash: deep
+  LcmConfig\ConfigurationRepositoryWeb\Server:
+    merge_hash: deep
+
+

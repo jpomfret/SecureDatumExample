@@ -1,0 +1,18 @@
+Configurations:
+  - DscTagging
+
+DscTagging:
+  Version: 0.3.0
+
+LcmConfig:
+  Settings:
+    RefreshMode: Push
+    RefreshFrequencyMins: 45
+    RebootNodeIfNeeded: false
+    ActionAfterReboot: ContinueConfiguration
+    AllowModuleOverwrite: false
+    #CertificateID: ...
+    ConfigurationMode: ApplyAndMonitor
+    ConfigurationModeFrequencyMins: 15
+  ResourceRepositoryShare:
+    SourcePath: '\\server\Modules\DSC\Modules'

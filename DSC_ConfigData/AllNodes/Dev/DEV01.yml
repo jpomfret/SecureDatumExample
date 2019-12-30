@@ -1,0 +1,18 @@
+NodeName: DEV01
+Environment: Dev
+Role: SqlServer
+Description: SQL Server in Dev
+
+PSDscAllowPlainTextPassword: True
+PSDscAllowDomainUser: True
+
+LcmConfig:
+  Settings:
+    ConfigurationId: 5d0e539e-e897-4fe2-bceb-34324aa071f6
+
+SqlServer:
+  InstallFeatures:
+    - IS
+  DiskStyle: CDriveOnly
+  SqlVersion: 2017
+  SqlEdition: Developer

@@ -1,0 +1,5 @@
+Configurations:
+  - DscTagging
+
+DscTagging:
+  Environment: Dev
